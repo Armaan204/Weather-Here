@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>
+  function use_ip(json) {
+    $.ajax({
+      // Use a placeholder URL for the AJAX request
+      url: "{% url 'get_weather_from_ip' %}",
+      data: {"ip": json.ip},
+      dataType: 'json',
+      success: function (data) {
+        document.getElementById("weatherdata").innerHTML = data.weather_data;
+      }
+    });
+  }
+  </script>
+
+<script src="https://api.ipify.org?format=jsonp&callback=use_ip"></script>
+  
+</head>
+<body>
+    {% block content %}{% endblock content %}
+</body>
+</html>
